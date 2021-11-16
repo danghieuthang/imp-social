@@ -1,7 +1,8 @@
 from TikTokApi import TikTokApi
 from enum import Enum
-
-
+import random
+import string
+verify = "verify_kvwl58id_1gVOlzYk_5tBY_4Gyr_Beyf_kEnL257ciLGS"
 class TiktokError(Enum):
     HASH_TAG_NOT_CORRECT = 1
     USERNAME_NOT_CORRECT = 2
@@ -9,7 +10,10 @@ class TiktokError(Enum):
 
 class TiktokService:
     def __init__(self, *args, **kwargs):
-        self.api = TikTokApi.get_instance()
+        did="".join(random.choice(string.digits) for num in range(19))
+        self.api = TikTokApi.get_instance(custom_verifyFp=verify,did=did)
+
+
 
     def verify_user(self, username: str, hash_tag: str) -> dict:
         if "www." in username:
@@ -18,6 +22,27 @@ class TiktokService:
             user = self.api.get_user(username=username)
             if user and hash_tag in user["seoProps"]["metaParams"]["description"]:
                 return user["userInfo"]
+        except: 
+            return None
+        return None
+
+    def get_user(self, username: str) -> dict:
+        if "www." in username:
+            username = username.split("@")[-1]
+        try:
+            user = self.api.get_user(username=username)
+            if user:
+                return user["userInfo"]
+        except: 
+            return None
+        return None
+    def get_list_post(self, username: str) -> dict:
+        if "www." in username:
+            username = username.split("@")[-1]
+        try:
+            user = self.api.get_user(username=username)
+            if user:
+                return user["items"]
         except: 
             return None
         return None

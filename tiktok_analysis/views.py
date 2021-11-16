@@ -23,7 +23,29 @@ def verify_titok_user(request):
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def get_user(request):
+    username =request.GET.get("username")
+    if username:
+        titok_serivce = TiktokService()
+        user = titok_serivce.get_user(username)
+        if user:
+            return Response(status=status.HTTP_200_OK, data=create_response(True, user))
+        return Response(status=status.HTTP_200_OK, data=create_response(False, None))
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def get_items_of_user(request):
+    username =request.GET.get("username")
+    if username:
+        titok_serivce = TiktokService()
+        user = titok_serivce.get_list_post(username)
+        if user:
+            return Response(status=status.HTTP_200_OK, data=create_response(True, user))
+        return Response(status=status.HTTP_200_OK, data=create_response(False, None))
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 @api_view(['POST'])
 def get_summary_post(request):
     seriazlier = GetSumaryPostSerializer(data=request.data)
