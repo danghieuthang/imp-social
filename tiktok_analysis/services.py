@@ -2,7 +2,7 @@ from TikTokApi import TikTokApi
 from enum import Enum
 import random
 import string
-verify = "verify_kvwl58id_1gVOlzYk_5tBY_4Gyr_Beyf_kEnL257ciLGS"
+verify = "verify_755352e33a1c44835827311a4e2b43f3"
 class TiktokError(Enum):
     HASH_TAG_NOT_CORRECT = 1
     USERNAME_NOT_CORRECT = 2

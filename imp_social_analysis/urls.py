@@ -27,4 +27,5 @@ urlpatterns = [
     path('', index),
     path('admin/', admin.site.urls),
     path('tiktok/', include('tiktok_analysis.urls')),
+    path('facebook/', include('facebook_analysis.urls')),
 ]
