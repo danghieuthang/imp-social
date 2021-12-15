@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('get-post', views.get_post),
+    path('get-user', views.get_user),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

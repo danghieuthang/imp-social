@@ -8,3 +8,10 @@ def getInformationOfPost(url: str):
     if post:
         return post
     return None
+
+def getInformationOfUser(username: str):
+    cookie = os.path.join(settings.BASE_DIR, 'cookie.txt')
+    user = get_profile(account= username, cookies=cookie)
+    if user:
+        return user
+    return None
